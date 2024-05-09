@@ -1,0 +1,6 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+  <h1>Table: {{ table.number }}</h1>
+  <img src="{{ table.qr_code.url }}" alt="QR Code for Table {{ table.number }}">
+{% endblock %}

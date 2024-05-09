@@ -16,7 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from customer import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("tables/", views.TableListView.as_view(), name="table_list"),
 ]
