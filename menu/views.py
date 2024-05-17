@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 from .models import Category, MenuItem, Order
 from .serializers import CategorySerializer, MenuItemSerializer, OrderSerializer
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .forms import MenuItemOptionForm
 
 class CategoryViewSet(viewsets.ModelViewSet):
@@ -15,10 +15,9 @@ class MenuItemViewSet(viewsets.ModelViewSet):
 class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
-
-from django.shortcuts import render, get_object_or_404, redirect
-from .models import MenuItem, Order
-from .forms import MenuItemOptionForm
+    
+def order_confirmation_view(request):
+    return render(request, 'order_confirmation.html')
 
 def menu_view(request):
     categories = Category.objects.all()

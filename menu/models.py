@@ -13,7 +13,7 @@ class MenuItem(models.Model):
     image = models.ImageField(upload_to='menu_images/')
     price = models.DecimalField(max_digits=10, decimal_places=2)
     details = models.TextField()
-    options = models.JSONField(default=dict, blank=True, null=True)  # Assuming options are stored as JSON
+    options = models.JSONField(default=dict, blank=True, null=True)  # Options stored as JSON
 
     def __str__(self):
         return self.name
@@ -21,6 +21,7 @@ class MenuItem(models.Model):
 class Order(models.Model):
     menu_item = models.ForeignKey(MenuItem, related_name='orders', on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
+    selected_options = models.JSONField(default=dict, blank=True, null=True)  # Selected options stored as JSON
     notes = models.TextField(blank=True, null=True)
     status = models.CharField(max_length=50, choices=[('Preparing', 'Preparing'), ('Ready', 'Ready'), ('Served', 'Served')], default='Preparing')
     created_at = models.DateTimeField(auto_now_add=True)
