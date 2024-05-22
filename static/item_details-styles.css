@@ -1,0 +1,118 @@
+/* styles.css */
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #4CAF50;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+.header-content h1 {
+    color: white;
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.header-content img {
+    height: 30px;
+}
+
+.main {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.item-detail-section {
+    text-align: center;
+}
+
+.item-detail img.item-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.item-detail h2 {
+    margin: 20px 0 10px;
+    color: #333;
+    font-size: 1.8em;
+}
+
+.item-detail p {
+    margin: 0 10px 10px;
+    color: #777;
+    font-size: 1em;
+}
+
+.item-form {
+    margin: 20px 0;
+}
+
+.item-form label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+
+.item-form select, .item-form input {
+    padding: 5px;
+    width: 100%;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.item-form button {
+    background-color: #ff9900;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+}
+
+.item-form button:hover {
+    background-color: #cc7a00;
+}
+
+.footer-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #4CAF50;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer-link {
+    text-align: center;
+    color: white;
+    text-decoration: none;
+}
+
+.footer-link img {
+    height: 25px;
+    margin-bottom: 5px;
+}
+
+.footer-link span {
+    display: block;
+    font-size: 0.8em;
+}

@@ -1,138 +1,45 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ item.name }} - JOJO Cafe</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 100%;
-            margin: 0 auto;
-            padding: 10px;
-            background-color: #fff;
-        }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #4CAF50;
-            padding: 10px 20px;
-            border-radius: 10px;
-        }
-        .header h1 {
-            color: white;
-            margin: 0;
-            font-size: 1.5em;
-        }
-        .header img {
-            height: 30px;
-        }
-        .item-detail {
-            margin-top: 20px;
-            text-align: center;
-        }
-        .item-detail img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px;
-        }
-        .item-detail h2 {
-            margin: 20px 0 10px;
-            color: #333;
-            font-size: 1.8em;
-        }
-        .item-detail p {
-            margin: 0 10px 10px;
-            color: #777;
-            font-size: 1em;
-        }
-        .item-detail button {
-            background-color: #ff9900;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.2s;
-        }
-        .item-detail button:hover {
-            background-color: #cc7a00;
-        }
-        .footer {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            background-color: #4CAF50;
-            padding: 10px 0;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-        .footer div {
-            text-align: center;
-            color: white;
-        }
-        .footer img {
-            height: 25px;
-            margin-bottom: 5px;
-        }
-        .footer p {
-            margin: 0;
-            font-size: 0.8em;
-        }
-        form {
-            margin: 20px 0;
-        }
-        label {
-            display: block;
-            margin: 10px 0 5px;
-            font-weight: bold;
-        }
-        select, input {
-            padding: 5px;
-            width: 100%;
-            margin-bottom: 15px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-    </style>
+    <title>{{ item.name }} - JOJO CAFE</title>
+    <link rel="stylesheet" href="{% static 'item_details-styles.css' %}">
 </head>
 <body>
-    {% load static %}
-    <div class="container">
-        <div class="header">
-            <img src="{% static 'images/turkish-flag.png' %}" alt="Turkish Flag">
-            <h1>JOJO Cafe</h1>
-            <img src="{% static 'images/email-icon.png' %}" alt="Email Icon">
+    <header>
+        <div class="header-content">
+            <img src="{% static 'images/turkish-flag.png' %}" alt="Turkish Flag" class="flag">
+            <h1>JOJO CAFE</h1>
+            <img src="{% static 'images/email-icon.svg' %}" alt="Notification Icon" class="notification">
         </div>
-        <div class="item-detail">
-            <img src="{{ item.image.url }}" alt="{{ item.name }}">
-            <h2>{{ item.name }}</h2>
-            <p>{{ item.details }}</p>
-            <form method="POST">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit">Order Now - ${{ item.price }}</button>
-            </form>
-        </div>
-    </div>
-    <div class="footer">
-        <div>
-            <img src="{% static 'images/orders-icon.png' %}" alt="Orders Icon">
-            <p>Orders</p>
-        </div>
-        <div>
-            <img src="{% static 'images/menu-icon.png' %}" alt="Menu Icon">
-            <p>Menu</p>
-        </div>
-    </div>
+    </header>
+    <main>
+        <section class="item-detail-section">
+            <div class="item-detail">
+                <img src="{{ item.image.url }}" alt="{{ item.name }}" class="item-image">
+                <h2>{{ item.name }}</h2>
+                <p>{{ item.details }}</p>
+                <form method="POST" class="item-form">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Order Now - ${{ item.price }}</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <nav class="footer-nav">
+            <a href="#" class="footer-link">
+                <img src="{% static 'images/menu-icon.svg' %}" alt="Orders">
+                <span>Orders</span>
+            </a>
+            <a href="{% url 'menu' %}" class="footer-link">
+                <img src="{% static 'images/menu-icon.svg' %}" alt="Menu">
+                <span>Menu</span>
+            </a>
+        </nav>
+    </footer>
 </body>
 </html>

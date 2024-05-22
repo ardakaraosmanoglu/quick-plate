@@ -1,23 +1,24 @@
 from django.db import models
 
+from django.db import models
+
 class Category(models.Model):
-    name = models.CharField(max_length=255)
-    description = models.TextField(blank=True, null=True)
+    name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
 
 class MenuItem(models.Model):
-    category = models.ForeignKey(Category, related_name='menu_items', on_delete=models.CASCADE)
-    name = models.CharField(max_length=255)
+    category = models.ForeignKey(Category, related_name='items', on_delete=models.CASCADE)
     image = models.ImageField(upload_to='menu_images/')
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    details = models.TextField()
-    options = models.JSONField(default=dict, blank=True, null=True)  # Options stored as JSON
+    name = models.CharField(max_length=100)
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+    details = models.TextField(blank=True, null=True)
+    options = models.JSONField(default=dict)  # Ensure options are stored as JSON
 
     def __str__(self):
         return self.name
-
+    
 class Order(models.Model):
     menu_item = models.ForeignKey(MenuItem, related_name='orders', on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)

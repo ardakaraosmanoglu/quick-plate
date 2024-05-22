@@ -1,158 +1,49 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JOJO Cafe Menu</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 100%;
-            margin: 0 auto;
-            padding: 10px;
-            background-color: #fff;
-        }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #4CAF50;
-            padding: 10px 20px;
-            border-radius: 10px;
-        }
-        .header h1 {
-            color: white;
-            margin: 0;
-            font-size: 1.5em;
-        }
-        .header img {
-            height: 30px;
-        }
-        .menu-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 20px;
-            justify-content: center;
-        }
-        .menu-item {
-            background-color: white;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            overflow: hidden;
-            width: calc(50% - 10px);
-            max-width: 300px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            transition: transform 0.2s;
-        }
-        .menu-item img {
-            max-width: 100%;
-            height: 150px;
-            object-fit: cover;
-        }
-        .menu-item h3 {
-            margin: 10px 0;
-            color: #333;
-            font-size: 1.2em;
-        }
-        .menu-item p {
-            margin: 0 10px 10px;
-            color: #777;
-            font-size: 0.9em;
-        }
-        .menu-item:hover {
-            transform: scale(1.05);
-        }
-        .menu-item button {
-            background-color: #ff9900;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.2s;
-        }
-        .menu-item button:hover {
-            background-color: #cc7a00;
-        }
-        .footer {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            background-color: #4CAF50;
-            padding: 10px 0;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-        .footer div {
-            text-align: center;
-            color: white;
-        }
-        .footer img {
-            height: 25px;
-            margin-bottom: 5px;
-        }
-        .footer p {
-            margin: 0;
-            font-size: 0.8em;
-        }
-        @media (max-width: 600px) {
-            .menu-item {
-                width: calc(100% - 20px);
-            }
-            .header img {
-                height: 20px;
-            }
-            .header h1 {
-                font-size: 1.2em;
-            }
-        }
-    </style>
+    <title>JOJO CAFE</title>
+    <link rel="stylesheet" href="{% static 'menu-styles.css' %}">
 </head>
 <body>
-    {% load static %}
-    <div class="container">
-        <div class="header">
-            <img src="{% static 'images/turkish-flag.png' %}" alt="Turkish Flag">
-            <h1>JOJO Cafe</h1>
-            <img src="{% static 'images/email-icon.svg' %}" alt="Email Icon">
+    <header>
+        <div class="header-content">
+            <img src="{% static 'images/turkish-flag.png' %}" alt="Turkish Flag" class="flag">
+            <h1>JOJO CAFE</h1>
+            <img src="{% static 'images/turkish-flag.png' %}" alt="Notification Icon" class="notification">
         </div>
+    </header>
+    <main>
         {% for category in categories %}
-        <h2>{{ category.name }}</h2>
-        <div class="menu-grid">
-            {% for item in menu_items %}
-            {% if item.category == category %}
-            <div class="menu-item">
-                <a href="{% url 'item_detail' item.pk %}">
-                    <img src="{{ item.image.url }}" alt="{{ item.name }}">
-                    <h3>{{ item.name }}</h3>
-                    <p>{{ item.details }}</p>
-                    <button>Order Now - ${{ item.price }}</button>
-                </a>
+        <section class="menu-section">
+            <h2>{{ category.name }}</h2>
+            <div class="menu-items">
+                {% for item in category.items.all %}
+                <div class="menu-item">
+                    <a href="{% url 'item_detail' item.pk %}">
+                        <img src="{{ item.image.url }}" alt="{{ item.name }}">
+                        <p>{{ item.name }}</p>
+                        <p>{{ item.price }}</p>
+                    </a>
+                </div>
+                {% endfor %}
             </div>
-            {% endif %}
-            {% endfor %}
-        </div>
+        </section>
         {% endfor %}
-    </div>
-    <div class="footer">
-        <div>
-            <img src="{% static 'images/orders-icon.svg' %}" alt="Orders Icon">
-            <p>Orders</p>
-        </div>
-        <div>
-            <img src="{% static 'images/menu-icon.svg' %}" alt="Menu Icon">
-            <p>Menu</p>
-        </div>
-    </div>
+    </main>
+    <footer>
+        <nav class="footer-nav">
+            <a href="#" class="footer-link">
+                <img src="{% static 'images/menu-icon.svg' %}" alt="Orders">
+                <span>Orders</span>
+            </a>
+            <a href="#" class="footer-link">
+                <img src="{% static 'images/menu-icon.svg' %}" alt="Menu">
+                <span>Menu</span>
+            </a>
+        </nav>
+    </footer>
 </body>
 </html>
