@@ -1,4 +1,4 @@
-from django.db import models
+# models.py
 
 from django.db import models
 
@@ -14,7 +14,7 @@ class MenuItem(models.Model):
     name = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     details = models.TextField(blank=True, null=True)
-    options = models.JSONField(default=dict)  # Ensure options are stored as JSON
+    options = models.JSONField(default=dict, blank=True, null=True)  # Ensure options can be null or blank
 
     def __str__(self):
         return self.name

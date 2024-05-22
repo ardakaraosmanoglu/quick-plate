@@ -1,3 +1,5 @@
+#views.py 
+
 from rest_framework import viewsets
 from .models import Category, MenuItem, Order
 from .serializers import CategorySerializer, MenuItemSerializer, OrderSerializer
@@ -27,7 +29,7 @@ def menu_view(request):
 def item_detail_view(request, pk):
     item = get_object_or_404(MenuItem, pk=pk)
     if request.method == 'POST':
-        form = MenuItemOptionForm(request.POST, options=item.options)
+        form = MenuItemOptionForm(request.POST, options=item.options or {})
         if form.is_valid():
             selected_options = {key: value for key, value in form.cleaned_data.items() if key != 'quantity'}
             quantity = form.cleaned_data.get('quantity', 1)
@@ -38,5 +40,5 @@ def item_detail_view(request, pk):
             )
             return redirect('order_confirmation')  # Redirect to an order confirmation page or another page
     else:
-        form = MenuItemOptionForm(options=item.options)
+        form = MenuItemOptionForm(options=item.options or {})
     return render(request, 'item_detail.html', {'item': item, 'form': form})
