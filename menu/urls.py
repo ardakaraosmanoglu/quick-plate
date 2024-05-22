@@ -1,6 +1,8 @@
+#urls.py 
+
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import CategoryViewSet, MenuItemViewSet, OrderViewSet, menu_view, item_detail_view
+from .views import CategoryViewSet, MenuItemViewSet, OrderViewSet, menu_view, item_detail_view, order_list_view, customer_order_view
 from . import views
 
 router = DefaultRouter()
@@ -13,6 +15,8 @@ urlpatterns = [
     path('menu/', menu_view, name='menu'),
     path('menu/item/<int:pk>/', item_detail_view, name='item_detail'),
     path('order-confirmation/', views.order_confirmation_view, name='order_confirmation'),
+    path('orders/', order_list_view, name='order_list'),
+    path('customer-orders/', customer_order_view, name='customer_orders'),
 ]
 
 # For serving media files in development

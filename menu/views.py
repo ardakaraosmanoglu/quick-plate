@@ -5,6 +5,7 @@ from .models import Category, MenuItem, Order
 from .serializers import CategorySerializer, MenuItemSerializer, OrderSerializer
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import MenuItemOptionForm
+from decimal import Decimal
 
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
@@ -42,3 +43,20 @@ def item_detail_view(request, pk):
     else:
         form = MenuItemOptionForm(options=item.options or {})
     return render(request, 'item_detail.html', {'item': item, 'form': form})
+
+def order_list_view(request):
+    orders = Order.objects.all()
+    return render(request, 'order_list.html', {'orders': orders})
+
+def customer_order_view(request):
+    orders = Order.objects.all()
+    sub_total = sum(order.menu_item.price * order.quantity for order in orders)
+    vat_rate = Decimal('0.10')  # VAT rate as a Decimal
+    vat = sub_total * vat_rate
+    total = sub_total + vat
+    return render(request, 'customer_orders.html', {
+        'orders': orders,
+        'sub_total': sub_total,
+        'vat': vat,
+        'total': total
+    })

@@ -35,11 +35,11 @@
     </main>
     <footer>
         <nav class="footer-nav">
-            <a href="#" class="footer-link">
+            <a href="{% url 'order_list' %}" class="footer-link">
                 <img src="{% static 'images/menu-icon.svg' %}" alt="Orders">
                 <span>Orders</span>
             </a>
-            <a href="#" class="footer-link">
+            <a href="{% url 'customer_orders' %}" class="footer-link">
                 <img src="{% static 'images/menu-icon.svg' %}" alt="Menu">
                 <span>Menu</span>
             </a>

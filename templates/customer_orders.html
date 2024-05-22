@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Orders</title>
+    <link rel="stylesheet" href="{% static 'orderlist-styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>JOJO CAFE</h1>
+            <h2>Table X Orders</h2>
+        </header>
+        <div class="order-list">
+            {% for order in orders %}
+                <div class="order-card">
+                    <img src="{{ order.menu_item.image.url }}" alt="Order Image">
+                    <div class="order-details">
+                        <h3>{{ order.menu_item.name }}</h3>
+                        <p>{{ order.quantity }} Pcs - <span class="status {{ order.status|lower }}">{{ order.status }}</span></p>
+                        <p class="price">{{ order.menu_item.price }} ₺</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="summary">
+            <p>Sub Total: {{ sub_total }} ₺</p>
+            <p>VAT: {{ vat }} ₺</p>
+            <p>Total: {{ total }} ₺</p>
+            <button class="checkout-button">CHECKOUT</button>
+        </div>
+    </div>
+</body>
+</html>
