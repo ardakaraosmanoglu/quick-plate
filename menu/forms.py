@@ -8,8 +8,9 @@ class MenuItemOptionForm(forms.Form):
     def __init__(self, *args, **kwargs):
         options = kwargs.pop('options', {})
         super(MenuItemOptionForm, self).__init__(*args, **kwargs)
-        for option, choices in options.items():
-            self.fields[option] = forms.ChoiceField(
-                choices=[(choice, choice) for choice in choices],
-                label=option
-            )
+        if options:  # Only add fields if options are provided
+            for option, choices in options.items():
+                self.fields[option] = forms.ChoiceField(
+                    choices=[(choice, choice) for choice in choices],
+                    label=option
+                )
