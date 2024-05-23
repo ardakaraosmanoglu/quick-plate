@@ -10,24 +10,41 @@
 <body>
     <header>
         <div class="header-content">
-            <img src="{% static 'images/turkish-flag.png' %}" alt="Turkish Flag" class="flag">
+            <img src="{% static 'images/turkish-flag.png' %}" alt="Flag" class="flag">
             <h1>JOJO CAFE</h1>
-            <img src="{% static 'images/turkish-flag.png' %}" alt="Notification Icon" class="notification">
+            <img src="{% static 'images/notification-icon.png' %}" alt="Notification Icon" class="notification">
         </div>
     </header>
     <main>
+        <!-- Search Form -->
+        <form method="get" action="{% url 'menu' %}" class="search-form">
+            <input type="text" name="q" placeholder="Search For Food" value="{{ query }}">
+            <button type="submit"><img src="{% static 'images/search-icon.png' %}" alt="Search"></button>
+        </form>
+
+        <!-- Banner Section -->
+        <section class="banner">
+            <img src="{% static 'images/banner.png' %}" alt="Banner Image">
+            <div class="banner-text">
+                <p>Enjoy our most complete meal package service!</p>
+            </div>
+        </section>
+
+        <!-- Menu Items -->
         {% for category in categories %}
         <section class="menu-section">
             <h2>{{ category.name }}</h2>
             <div class="menu-items">
-                {% for item in category.items.all %}
-                <div class="menu-item">
-                    <a href="{% url 'item_detail' item.pk %}">
-                        <img src="{{ item.image.url }}" alt="{{ item.name }}">
-                        <p>{{ item.name }}</p>
-                        <p>{{ item.price }}</p>
-                    </a>
-                </div>
+                {% for item in menu_items %}
+                    {% if item.category == category %}
+                    <div class="menu-item">
+                        <a href="{% url 'item_detail' item.pk %}">
+                            <img src="{{ item.image.url }}" alt="{{ item.name }}">
+                            <p>{{ item.name }}</p>
+                            <p>${{ item.price }}</p>
+                        </a>
+                    </div>
+                    {% endif %}
                 {% endfor %}
             </div>
         </section>
@@ -36,7 +53,7 @@
     <footer>
         <nav class="footer-nav">
             <a href="{% url 'order_list' %}" class="footer-link">
-                <img src="{% static 'images/menu-icon.svg' %}" alt="Orders">
+                <img src="{% static 'images/orders-icon.svg' %}" alt="Orders">
                 <span>Orders</span>
             </a>
             <a href="{% url 'customer_orders' %}" class="footer-link">

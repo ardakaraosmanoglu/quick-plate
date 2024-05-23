@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Payment Method</title>
+    <link rel="stylesheet" href="{% static 'pay.css' %}">
+</head>
+<body>
+    <div class="payment-options">
+        <h2>Select Pay Way</h2>
+        <form method="post" action="{% url 'checkout' %}">
+            {% csrf_token %}
+            <button type="submit" name="payment_method" value="online">Online Payment</button>
+            <button type="submit" name="payment_method" value="card">Card (Call Waiter)</button>
+            <button type="submit" name="payment_method" value="cash">Cash (Call Waiter)</button>
+        </form>
+    </div>
+</body>
+</html>

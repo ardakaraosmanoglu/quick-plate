@@ -28,7 +28,9 @@
             <p>Sub Total: {{ sub_total }} ₺</p>
             <p>VAT: {{ vat }} ₺</p>
             <p>Total: {{ total }} ₺</p>
-            <button class="checkout-button">CHECKOUT</button>
+            <form action="{% url 'checkout' %}" method="get">
+                <button type="submit" class="checkout-button">CHECKOUT</button>
+            </form>
         </div>
     </div>
 </body>

@@ -6,6 +6,7 @@ from .serializers import CategorySerializer, MenuItemSerializer, OrderSerializer
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import MenuItemOptionForm
 from decimal import Decimal
+from django.db.models import Q
 
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
@@ -23,9 +24,16 @@ def order_confirmation_view(request):
     return render(request, 'order_confirmation.html')
 
 def menu_view(request):
+    query = request.GET.get('q', '')
+    if query:
+        menu_items = MenuItem.objects.filter(
+            Q(name__icontains=query) |
+            Q(details__icontains=query)
+        )
+    else:
+        menu_items = MenuItem.objects.all()
     categories = Category.objects.all()
-    menu_items = MenuItem.objects.all()
-    return render(request, 'menu.html', {'categories': categories, 'menu_items': menu_items})
+    return render(request, 'menu.html', {'categories': categories, 'menu_items': menu_items, 'query': query})
 
 def item_detail_view(request, pk):
     item = get_object_or_404(MenuItem, pk=pk)
@@ -60,3 +68,14 @@ def customer_order_view(request):
         'vat': vat,
         'total': total
     })
+
+def checkout_view(request):
+    if request.method == 'POST':
+        payment_method = request.POST.get('payment_method')
+        if payment_method:
+            return redirect('payment_success')  # Redirect to a payment success page
+    return render(request, 'checkout.html')
+
+def payment_success_view(request):
+    return render(request, 'payment_success.html')
+
