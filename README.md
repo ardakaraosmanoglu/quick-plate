@@ -1,3 +1,39 @@
+### Status of Demo
+
+Here is a comprehensive list of all features for the Quick Plate (QP) system, categorized into Admin, User, Kitchen, and Other functionalities, along with their statuses (Done or Not Done):
+
+## Back-End
+
+# Admin Functions
+1. **Admin Login** - **Done**
+2. **Add New Item to Menu** - **Done**
+3. **Add Categories** - **Done**
+4. **Add Item Details** - **Done**
+5. **Add Options for Items** - **Done**
+7. **View Analytics and Reports** - **Not Done**
+
+# User Functions
+1. **User Login** - **Done**
+2. **View Items** - **Done**
+3. **View Item Details** - **Done**
+4. **Customize Order** - **Done**
+5. **Place an Order** - **Done**
+6. **Pay** - **Done**
+7. **Leave Reviews and Ratings** - **Not Done**
+8. **Track Order Status in Real-time** - **Not Done**
+9. **Receive Order Notifications** - **Not Done**
+
+## Kitchen Functions
+1. **View All Orders** - **Done**
+2. **Manage Inventory** - **Done**
+3. **Generate Sales Reports** - **Not Done**
+
+This list provides a complete overview of the current status of all functionalities planned for the Quick Plate system.
+
+## Back-End
+
+# Under maintance
+
 ### APPENDICES
 
 #### A. Instructions for Installing the System
