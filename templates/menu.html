@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JOJO CAFE</title>
     <link rel="stylesheet" href="{% static 'menu-styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -52,11 +53,11 @@
         <nav class="footer-nav">
             <a href="{% url 'order_list' %}" class="footer-link">
                 <img src="{% static 'images/orders-icon.svg' %}" alt="Orders">
-                <span>Orders</span>
+                <span>All Orders</span>
             </a>
             <a href="{% url 'customer_orders' %}" class="footer-link">
                 <img src="{% static 'images/menu-icon.svg' %}" alt="Menu">
-                <span>Menu</span>
+                <span>Customer Order List</span>
             </a>
         </nav>
     </footer>
