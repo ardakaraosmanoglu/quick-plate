@@ -12,14 +12,12 @@
         <div class="header-content">
             <img src="{% static 'images/turkish-flag.png' %}" alt="Flag" class="flag">
             <h1>JOJO CAFE</h1>
-            <img src="{% static 'images/notification-icon.png' %}" alt="Notification Icon" class="notification">
         </div>
     </header>
     <main>
         <!-- Search Form -->
         <form method="get" action="{% url 'menu' %}" class="search-form">
             <input type="text" name="q" placeholder="Search For Food" value="{{ query }}">
-            <button type="submit"><img src="{% static 'images/search-icon.png' %}" alt="Search"></button>
         </form>
 
         <!-- Banner Section -->
